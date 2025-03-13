@@ -14,7 +14,7 @@ programa {
       
      se(precoPromocao <= descontoAplicado) {
       qtdProdutosDesconto++
-    }
+      }
 
     }
     escreva("A quantidade de produtos que tiveram um desconto de pelo menos 20% foi: ", qtdProdutosDesconto)
