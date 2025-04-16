@@ -4,20 +4,18 @@
 #define TAM 100
 
 int qtdAlunos = 0;
-float mediaNotas = 0, somaNotas = 0;
+float somaNotas = 0, mediaNotas = 0;
 
 struct notas{
     float matematica;
     float sociologia;
     float biologia;
 };
-
 typedef struct aluno{
     char nome[50];
     int matricula;
     struct notas notas;
 }Aluno;
-
 void cadastrarAluno(Aluno aluno[]) {
     
     if(qtdAlunos > TAM) {
@@ -39,7 +37,6 @@ void cadastrarAluno(Aluno aluno[]) {
     qtdAlunos++;
     printf("Matricula realizada com sucesso!\n\n");
 }
-
 void listarAluno(Aluno aluno[]) {
     
     for(int i = 0; i < qtdAlunos; i++) {
@@ -52,7 +49,6 @@ void listarAluno(Aluno aluno[]) {
         printf("Nota de Biologia: %.2f\n", aluno[i].notas.biologia);
     }   
 }
-
 int buscarAluno(Aluno aluno[], int matricula) {
 
     for(int i = 0; i < qtdAlunos; i++) {
@@ -62,7 +58,6 @@ int buscarAluno(Aluno aluno[], int matricula) {
     }
     return -1;
 }
-
 void mediaAluno(Aluno aluno[]) {
     int matricula;
     printf("Matricula do aluno: ");
@@ -80,7 +75,6 @@ void mediaAluno(Aluno aluno[]) {
         printf("Matricula nao encontrada.");
     }
 }
-
 void aprovacao(Aluno aluno[]) {
     for(int i = 0; i < qtdAlunos; i++) {
         somaNotas = aluno[i].notas.matematica + aluno[i].notas.sociologia + aluno[i].notas.biologia;
@@ -93,7 +87,6 @@ void aprovacao(Aluno aluno[]) {
         }
     }
 }
-
 void removerMatricula(Aluno aluno[]){
     int matricula;
 
@@ -103,10 +96,7 @@ void removerMatricula(Aluno aluno[]){
     int res = buscarAluno(aluno, matricula);
 
     if(res != -1) {
-        for(int i = res; i < qtdAlunos; i++) {
-            if(aluno[i].matricula == matricula) {
-                aluno[i] = aluno[i+1];
-            }
+        for(int i = res; i < qtdAlunos-1; i++) {
             qtdAlunos--;
         }
         printf("Aluno removido com sucesso!");
@@ -118,6 +108,7 @@ void removerMatricula(Aluno aluno[]){
 int main () {
     int opcao;
     Aluno aluno[TAM];
+    int matricula;
 
     while (1) {
         printf("Escolha uma opcao:\n");
@@ -151,10 +142,10 @@ int main () {
         
         case 3: 
             printf("\nDigite o numero da matricula: ");
-            scanf("%d", &aluno->matricula);
+            scanf("%d", &matricula);
 
             int res = buscarAluno(aluno, matricula);
-
+   
             if(res != -1) {
                 printf("\nAluno encontrado: \n");
                 printf("Nome: %s\n", aluno[res].nome);
